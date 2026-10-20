@@ -1,8 +1,16 @@
-import from python:3.12-slim
+#מיבאים את הimage בסיסי של פייתון
+FROM python:3.12-slim
+#ממקמים בתיקיית העבודה
 WORKDIR /app
+#מעתיקים תלויות לספריות שצריך להתקין
 COPY requirements.txt
-RUN pip install --no-cache-dir flask
-COPY app.py
+#מריצים את ההתקנה של הספריות
+RUN pip install --no-cache-dir requirements.txt
+#מעתיקים את הקוד
+COPY app.py .
+#שומרים משתנה סביבה
 ENV GREETING=Hello
+#מאזינים על איזה פורט האפליקציה רץ
 EXPOSE 8000
-cmd [python,app.py]
+#הפקודה שרצה כשהקונטיינר עולה
+cmd ["python","app.py"]
