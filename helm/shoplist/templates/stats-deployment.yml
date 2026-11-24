@@ -24,6 +24,13 @@ spec:
               value:  http://backend:5000        # backend Service name, with http:// and port
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              cpu: {{ .Values.stats.resources.requests.cpu | quote }}
+              memory: {{ .Values.stats.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.stats.resources.limits.cpu | quote }}
+              memory: {{ .Values.stats.resources.limits.memory }}
           readinessProbe:
             httpGet:
               path: /health

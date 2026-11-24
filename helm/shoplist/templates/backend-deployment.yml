@@ -38,6 +38,13 @@ spec:
                   key: POSTGRES_PASSWORD         # which key holds the password?
           ports:
             - containerPort: 5000   # Flask port
+          resources:
+            requests:
+              cpu: {{ .Values.backend.resources.requests.cpu | quote }}
+              memory: {{ .Values.backend.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.backend.resources.limits.cpu | quote }}
+              memory: {{ .Values.backend.resources.limits.memory }}
           readinessProbe:
             httpGet:
               path: /health            # the endpoint that answers "I am ready"
